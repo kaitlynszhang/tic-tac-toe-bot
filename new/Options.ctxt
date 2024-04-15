@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Options
+comment1.params=
+comment1.target=void\ showScreen()
+comment2.params=
+comment2.target=void\ hideScreen()
+comment3.params=G
+comment3.target=void\ repaint(java.awt.Graphics)
+comment4.params=gameState
+comment4.target=void\ update(GameState)
+comment5.params=
+comment5.target=java.awt.Component\ getComponent()
+numComments=6
