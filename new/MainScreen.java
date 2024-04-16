@@ -10,20 +10,19 @@ import java.awt.event.*;
 import java.net.URL.*;
 
 
-public class MainScreen extends JPanel implements Screen {
+public class MainScreen extends JPanel implements Screen, MouseListener {
 
     private GameState gameState;
-    private Image title;
+    private JLabel backgroundLabel;
     
+    // here is our ___________ for MainScreen
     // here we initialize our mainscreen (buttons, background, and etc)
     public MainScreen(GameState state) {
         this.gameState = state;
-        
-        try {
-            title = ImageIO.read(new File("Title.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ImageIcon mainScreenBackground = new ImageIcon("mainscreenbackground.gif");
+        backgroundLabel = new JLabel(mainScreenBackground);
+        add(backgroundLabel, BorderLayout.CENTER);
+        addMouseListener(this);
         // TODO
     }
     
@@ -55,6 +54,31 @@ public class MainScreen extends JPanel implements Screen {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(title, 0, 0, null);
+    }
+    
+    public void mouseClicked(MouseEvent e){
+        int x = e.getX();
+        int y = e.getY();
+        
+        // Big Rectangle (in the middle)
+        if (x >= 268 && x <= 631 && y >= 519 && y <= 563) {
+            Main.switchScreen(new Options(gameState));
+        }
+    }
+    
+    public void mousePressed(MouseEvent e){
+        
+    }
+    
+    public void mouseReleased(MouseEvent e){
+        
+    }
+    
+    public void mouseEntered(MouseEvent e){
+        
+    }
+    
+    public void mouseExited(MouseEvent e){
+        
     }
 }
