@@ -1,8 +1,59 @@
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Component;
+import javax.swing.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.*;
+import java.awt.Color.*;
+import java.awt.event.*;
+import java.net.URL.*;
 
-public class GameScreen  extends JPanel implements Screen{
+public class GameScreen extends JPanel implements Screen, MouseListener{
+    
+    private GameState gameState;
+    private JLabel backgroundLabel;
+    
+    public GameScreen(GameState state) {
+        this.gameState = state;
+        if (gameState.theme == "default") {
+            ImageIcon gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+        else if (gameState.theme == "sunset") {
+            ImageIcon gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+        else if (gameState.theme == "snowy") {
+            ImageIcon gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+        else if (gameState.theme == "rainy") {
+            ImageIcon gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+        else if (gameState.theme == "night") {
+            ImageIcon gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+        else if (gameState.theme == "adventure") {
+            ImageIcon gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
+            backgroundLabel = new JLabel(gameScreenBackground);
+            add(backgroundLabel, BorderLayout.CENTER);
+            addMouseListener(this);
+        }
+    }
+    
     // here we set the visibility of the main screen to true and start any animations, music and etc
     public void showScreen() {
         this.setVisible(true);

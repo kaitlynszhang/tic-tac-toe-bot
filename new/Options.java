@@ -10,16 +10,15 @@ import java.awt.event.*;
 import java.net.URL.*;
 
 
-public class Options extends JPanel implements Screen{
+public class Options extends JPanel implements Screen, MouseListener{
     
     private GameState gameState;
     private JLabel backgroundLabel;
     
     public Options(GameState state) {
         this.gameState = state;
-        setLayout(new GridLayout(4, 1));
-        ImageIcon mainScreenBackground = new ImageIcon("02pgV9.gif");
-        backgroundLabel = new JLabel(mainScreenBackground);
+        ImageIcon optionsScreenBackground = new ImageIcon("options-page.png");
+        backgroundLabel = new JLabel(optionsScreenBackground);
         add(backgroundLabel, BorderLayout.CENTER);
     }
     
@@ -51,5 +50,36 @@ public class Options extends JPanel implements Screen{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+    }
+    
+        public void mouseClicked(MouseEvent e){
+        int x = e.getX();
+        int y = e.getY();
+        
+        //mode selection
+        if (x >= 268 && x <= 322 && y >= 668 && y <= 722) {
+
+        }
+        //difficulty
+        //dimensions
+        //board size
+        //number of rounds
+        //player select
+    }
+    
+    public void mousePressed(MouseEvent e){
+        
+    }
+    
+    public void mouseReleased(MouseEvent e){
+        
+    }
+    
+    public void mouseEntered(MouseEvent e){
+        
+    }
+    
+    public void mouseExited(MouseEvent e){
+        
     }
 }

@@ -11,6 +11,7 @@ public class Main
     {
         gameState = new GameState();
         initializeFrame();
+        gameState.theme = "default";
         switchScreen(new MainScreen(gameState));
     }
     
@@ -18,7 +19,7 @@ public class Main
         frame = new JFrame();
         frame.setBounds(0, 0, 900, 900);
         frame.setTitle("Tic Tac Toe! by Kaitlyn Zhang");
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }

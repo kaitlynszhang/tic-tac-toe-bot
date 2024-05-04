@@ -4,5 +4,7 @@ public class GameState {
     int boardSize; // 3, 4, 5 (3x3, 4x4, 5x5)
     int difficulty; // 0 for easy, 1 for medium, 2 for hard (only when computer is chosen)
     int rounds; // 1, 3, 5
-    int themes; // 0, 1....
+    int player1;
+    int player2;
+    String theme; // sunset, snowy, rainy, night, adventure
 }
