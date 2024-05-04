@@ -8,19 +8,45 @@ import java.awt.*;
 import java.awt.Color.*;
 import java.awt.event.*;
 import java.net.URL.*;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Options extends JPanel implements Screen, MouseListener{
     
     private GameState gameState;
-    private JLabel backgroundLabel;
+    private BufferedImage background;
+    
+    private BufferedImage onePlayerImage;
+    private BufferedImage twoPlayerImage;
+    private boolean onePlayerSelected = false;
+    private boolean twoPlayerSelected = false;
+    
+    // For each set of options add a bufferedimage for each options and a boolean for each option
+    // ...
+    private BufferedImage easyDifficultyImage;
+    private BufferedImage mediumDifficultyImage;
+    private BufferedImage hardDifficultyImage;
+    private boolean easyDifficultySelected = false;
+    private boolean mediumDifficultySelected = false;
+    private boolean hardDifficultySelected = false;
     
     public Options(GameState state) {
         this.gameState = state;
-        ImageIcon optionsScreenBackground = new ImageIcon("options-page.png");
-        backgroundLabel = new JLabel(optionsScreenBackground);
-        add(backgroundLabel, BorderLayout.CENTER);
+        try {
+            background = ImageIO.read(new File("options-page.png"));
+            onePlayerImage = ImageIO.read(new File("oneplayer.png"));
+            twoPlayerImage = ImageIO.read(new File("twoplayer.png"));
+            // here you have to load in the rest of the images for the buttons
+            easyDifficultyImage = ImageIO.read(new File("easy.png"));
+            mediumDifficultyImage = ImageIO.read(new File("medium.png"));
+            hardDifficultyImage = ImageIO.read(new File("hard.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         addMouseListener(this);
+        setPreferredSize(new Dimension(background.getWidth(), background.getHeight()));
     }
     
     // here we set the visibility of the main screen to true and start any animations, music and etc
@@ -51,29 +77,71 @@ public class Options extends JPanel implements Screen, MouseListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(background, 0, 0, this);
+        if (onePlayerSelected) {
+            g.drawImage(onePlayerImage, 0, 0, this);
+        }
+        if (twoPlayerSelected) {
+            g.drawImage(twoPlayerImage, 0, 0, this);
+        }
+        
+        if (onePlayerSelected) {
+            // add if statement for each of the rest of the buttons (15)
+            if (easyDifficultySelected) {
+                g.drawImage(easyDifficultyImage, 0, 0, this);
+            } else if (mediumDifficultySelected) {
+                g.drawImage(mediumDifficultyImage, 0, 0, this);
+            } else if (hardDifficultySelected) {
+                g.drawImage(hardDifficultyImage, 0, 0, this);
+            }
+        }
+        
+        
     }
     
-        public void mouseClicked(MouseEvent e){
+    public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        
-        //mode selection
-        if (x >= 268 && x <= 322 && y >= 668 && y <= 722) {
+        System.out.println("mouse click detected at " + x + ", " + y);
 
+        if (x >= 98 && x <= 388 && y >= 204 && y <= 294) {
+            gameState.players = 1;
+            onePlayerSelected = true;
+            twoPlayerSelected = false;
+            System.out.println("1 player selected");
+        } else if (x >= 502 && x <= 802 && y >= 203 && y <= 293) {
+            gameState.players = 2;
+            onePlayerSelected = false;
+            twoPlayerSelected = true;
+            System.out.println("1 players selected");
         }
-        //difficulty
-        //dimensions
-        //board size
-        //number of rounds
-        //player select
+        /*
+         easy: x >= 100, x <= 190, y >= 350, y <= 440 
+         medium: x >= 200, x <= 290, y >= 350, y <= 440
+         hard: x >= 300, x <= 390, y >= 350, y <= 440
+         */
+        if (onePlayerSelected) {
+            if (x >= 100 && x <= 190 && y >= 350 && y <= 440) {
+                gameState.difficulty = 0;
+                easyDifficultySelected = true;
+                mediumDifficultySelected = false;
+                hardDifficultySelected = false;
+            } else if (x >= 200 && x <= 290 && y >= 350 && y <= 440) {
+                gameState.difficulty = 1;
+                easyDifficultySelected = false;
+                mediumDifficultySelected = true;
+                hardDifficultySelected = false;
+            } else if (x >= 300 && x <= 390 && y >= 350 && y <= 440) {
+                gameState.difficulty = 2;
+                easyDifficultySelected = false;
+                mediumDifficultySelected = false;
+                hardDifficultySelected = true;
+            }
+        }
         
-        //continue
-        if (x >= 583 && x <= 743 && y >= 741 && y <= 839) {
-            Main.switchScreen(new GameScreen(gameState));
-        }
-        else if (x >= 720 && x <= 812 && y >= 771 && y <= 839) {
-            Main.switchScreen(new GameScreen(gameState));
-        }
+        // add if/else if conditionals for each of the sets
+        
+        repaint();
     }
     
     public void mousePressed(MouseEvent e){
