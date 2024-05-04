@@ -54,12 +54,12 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         }
     }
     
-    // here we set the visibility of the main screen to true and start any animations, music and etc
+    // here i set the visibility of the main screen to true and start any animations, music and etc
     public void showScreen() {
         this.setVisible(true);
     }
     
-    // after we hide screen we want to set visibility to false and stop animations, music and etc
+    // after i hide screen we want to set visibility to false and stop animations, music and etc
     public void hideScreen() {
         this.setVisible(false);
     }
@@ -69,7 +69,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
     }
     
-    // here we change what is shown based off of game state
+    // here i change what is shown based off of game state
     public void update(GameState gameState) {
         
     }

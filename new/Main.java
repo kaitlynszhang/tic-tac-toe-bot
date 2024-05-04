@@ -6,7 +6,7 @@ public class Main
     private static Screen currentScreen;
     private static GameState gameState;
     
-    // here we initialize the JFrame with the function and create a gameState and show the Main Screen
+    // here i initialize the JFrame with the function and create a gameState and show the Main Screen
     public static void main(String[] args)
     {
         gameState = new GameState();

@@ -17,20 +17,47 @@ public class Options extends JPanel implements Screen, MouseListener{
     
     private GameState gameState;
     private BufferedImage background;
-    
+    //player mode
     private BufferedImage onePlayerImage;
     private BufferedImage twoPlayerImage;
     private boolean onePlayerSelected = false;
     private boolean twoPlayerSelected = false;
-    
-    // For each set of options add a bufferedimage for each options and a boolean for each option
-    // ...
+    // difficulty
     private BufferedImage easyDifficultyImage;
     private BufferedImage mediumDifficultyImage;
     private BufferedImage hardDifficultyImage;
     private boolean easyDifficultySelected = false;
     private boolean mediumDifficultySelected = false;
     private boolean hardDifficultySelected = false;
+    // dimensions
+    private BufferedImage TwoDimImage;
+    private BufferedImage ThreeDimImage;
+    private boolean TwoDimSelected = false;
+    private boolean ThreeDimSelected = false;
+    // board size
+    private BufferedImage ThreexThreeImage;
+    private BufferedImage FourxFourImage;
+    private BufferedImage FivexFiveImage;
+    private boolean ThreexThreeSelected = false;
+    private boolean FourxFourSelected = false;
+    private boolean FivexFiveSelected = false;
+    // number of rounds
+    private BufferedImage bestOf1Image;
+    private BufferedImage bestOf3Image;
+    private BufferedImage bestOf5Image;
+    private boolean bestOf1Selected = false;
+    private boolean bestOf3Selected = false;
+    private boolean bestOf5Selected = false;
+    //player 1 gender
+    private BufferedImage p1MaleImage;
+    private BufferedImage p1FemaleImage;
+    private boolean p1MaleSelected = false;
+    private boolean p1FemaleSelected = false;
+    //player 2 gender
+    private BufferedImage p2MaleImage;
+    private BufferedImage p2FemaleImage;
+    private boolean p2MaleSelected = false;
+    private boolean p2FemaleSelected = false;
     
     public Options(GameState state) {
         this.gameState = state;
@@ -38,10 +65,27 @@ public class Options extends JPanel implements Screen, MouseListener{
             background = ImageIO.read(new File("options-page.png"));
             onePlayerImage = ImageIO.read(new File("oneplayer.png"));
             twoPlayerImage = ImageIO.read(new File("twoplayer.png"));
-            // here you have to load in the rest of the images for the buttons
+            
             easyDifficultyImage = ImageIO.read(new File("easy.png"));
             mediumDifficultyImage = ImageIO.read(new File("medium.png"));
             hardDifficultyImage = ImageIO.read(new File("hard.png"));
+            
+            TwoDimImage = ImageIO.read(new File("2d.png"));
+            ThreeDimImage = ImageIO.read(new File("3d.png"));
+            
+            ThreexThreeImage = ImageIO.read(new File("3x3.png"));
+            FourxFourImage = ImageIO.read(new File("4x4.png"));
+            FivexFiveImage = ImageIO.read(new File("5x5.png"));
+            
+            bestOf1Image = ImageIO.read(new File("best of 1.png"));
+            bestOf3Image = ImageIO.read(new File("best of 2.png"));
+            bestOf5Image = ImageIO.read(new File("best of 5.png"));
+            
+            p1MaleImage = ImageIO.read(new File("p1 male.png"));
+            p1FemaleImage = ImageIO.read(new File("p1 female.png"));
+            
+            p2MaleImage = ImageIO.read(new File("p2 male.png"));
+            p2FemaleImage = ImageIO.read(new File("p2 female.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -80,23 +124,85 @@ public class Options extends JPanel implements Screen, MouseListener{
         g.drawImage(background, 0, 0, this);
         if (onePlayerSelected) {
             g.drawImage(onePlayerImage, 0, 0, this);
-        }
-        if (twoPlayerSelected) {
-            g.drawImage(twoPlayerImage, 0, 0, this);
-        }
-        
-        if (onePlayerSelected) {
             // add if statement for each of the rest of the buttons (15)
             if (easyDifficultySelected) {
                 g.drawImage(easyDifficultyImage, 0, 0, this);
+                if (ThreexThreeSelected) {
+                    g.drawImage(ThreexThreeImage, 0, 0, this);
+                }
+                if (FourxFourSelected) {
+                    g.drawImage(FourxFourImage, 0, 0, this);
+                }
+                if (FivexFiveSelected) {
+                    g.drawImage(FivexFiveImage, 0, 0, this);
+                }
             } else if (mediumDifficultySelected) {
                 g.drawImage(mediumDifficultyImage, 0, 0, this);
+                if (ThreexThreeSelected) {
+                    g.drawImage(ThreexThreeImage, 0, 0, this);
+                }
             } else if (hardDifficultySelected) {
                 g.drawImage(hardDifficultyImage, 0, 0, this);
+                if (ThreexThreeSelected) {
+                    g.drawImage(ThreexThreeImage, 0, 0, this);
+                }
+            }
+            
+            if (bestOf1Selected) {
+                g.drawImage(bestOf1Image, 0, 0, this);
+            } else if (bestOf3Selected) {
+                g.drawImage(bestOf3Image, 0, 0, this);
+            } else if (bestOf5Selected) {
+                g.drawImage(bestOf5Image, 0, 0, this);
+            }
+            
+            if (p1MaleSelected) {
+                g.drawImage(p1MaleImage, 0, 0, this);
+            } else if (p1FemaleSelected) {
+                g.drawImage(p1FemaleImage, 0, 0, this);
             }
         }
-        
-        
+    
+        if (twoPlayerSelected) {
+            g.drawImage(twoPlayerImage, 0, 0, this);
+            if (TwoDimSelected) {
+                g.drawImage(TwoDimImage, 0, 0, this);
+                if (ThreexThreeSelected) {
+                    g.drawImage(ThreexThreeImage, 0, 0, this);
+                }
+                if (FourxFourSelected) {
+                    g.drawImage(FourxFourImage, 0, 0, this);
+                }
+                if (FivexFiveSelected) {
+                    g.drawImage(FivexFiveImage, 0, 0, this);
+                }
+            } else if (ThreeDimSelected) {
+                g.drawImage(ThreeDimImage, 0, 0, this);
+                if (ThreexThreeSelected) {
+                    g.drawImage(ThreexThreeImage, 0, 0, this);
+                }
+            }
+            
+            if (bestOf1Selected) {
+                g.drawImage(bestOf1Image, 0, 0, this);
+            } else if (bestOf3Selected) {
+                g.drawImage(bestOf3Image, 0, 0, this);
+            } else if (bestOf5Selected) {
+                g.drawImage(bestOf5Image, 0, 0, this);
+            }
+            
+            if (p1MaleSelected) {
+                g.drawImage(p1MaleImage, 0, 0, this);
+            } else if (p1FemaleSelected) {
+                g.drawImage(p1FemaleImage, 0, 0, this);
+            }
+            
+            if (p2MaleSelected) {
+                g.drawImage(p2MaleImage, 0, 0, this);
+            } else if (p2FemaleSelected) {
+                g.drawImage(p2FemaleImage, 0, 0, this);
+            }
+        }
     }
     
     public void mouseClicked(MouseEvent e) {
@@ -113,13 +219,9 @@ public class Options extends JPanel implements Screen, MouseListener{
             gameState.players = 2;
             onePlayerSelected = false;
             twoPlayerSelected = true;
-            System.out.println("1 players selected");
+            System.out.println("2 players selected");
         }
-        /*
-         easy: x >= 100, x <= 190, y >= 350, y <= 440 
-         medium: x >= 200, x <= 290, y >= 350, y <= 440
-         hard: x >= 300, x <= 390, y >= 350, y <= 440
-         */
+        
         if (onePlayerSelected) {
             if (x >= 100 && x <= 190 && y >= 350 && y <= 440) {
                 gameState.difficulty = 0;
@@ -137,10 +239,100 @@ public class Options extends JPanel implements Screen, MouseListener{
                 mediumDifficultySelected = false;
                 hardDifficultySelected = true;
             }
+            
+            if (x >= 98 && x <= 320 && y >= 485 && y <= 575) {
+                gameState.boardSize = 3;
+                ThreexThreeSelected = true;
+                FourxFourSelected = false;
+                FivexFiveSelected = false;
+            } else if (x >= 335 && x <= 557 && y >= 485 && y <= 575 && easyDifficultySelected == true) {
+                gameState.boardSize = 4;
+                ThreexThreeSelected = false;
+                FourxFourSelected = true;
+                FivexFiveSelected = false;
+            } else if (x >= 572 && x <= 795 && y >= 485 && y <= 575 && easyDifficultySelected == true) {
+                gameState.boardSize = 5;
+                ThreexThreeSelected = false;
+                FourxFourSelected = false;
+                FivexFiveSelected = true;
+            }
+            
+            if (x >= 158 && x <= 199 && y >= 764 && y <= 813) {
+                gameState.player1 = 0;
+                p1MaleSelected = true;
+                p1FemaleSelected = false;
+            } else if (x >= 224 && x <= 268 && y >= 764 && y <= 813) {
+                gameState.player1 = 1;
+                p1MaleSelected = false;
+                p1FemaleSelected = true;
+            }
+        }
+    
+        if (twoPlayerSelected) {
+            if (x >= 502 && x <= 646 && y >= 350 && y <= 440) {
+                gameState.mode = 2;
+                TwoDimSelected = true;
+                ThreeDimSelected = false;
+            } else if (x >= 653 && x <= 795 && y >= 350 && y <= 440) {
+                gameState.mode = 3;
+                TwoDimSelected = false;
+                ThreeDimSelected = true;
+            }
+            
+            if (x >= 98 && x <= 320 && y >= 485 && y <= 575) {
+                gameState.boardSize = 3;
+                ThreexThreeSelected = true;
+                FourxFourSelected = false;
+                FivexFiveSelected = false;
+            } else if (x >= 335 && x <= 557 && y >= 485 && y <= 575 && TwoDimSelected == true) {
+                gameState.boardSize = 4;
+                ThreexThreeSelected = false;
+                FourxFourSelected = true;
+                FivexFiveSelected = false;
+            } else if (x >= 572 && x <= 795 && y >= 485 && y <= 575 && TwoDimSelected == true) {
+                gameState.boardSize = 5;
+                ThreexThreeSelected = false;
+                FourxFourSelected = false;
+                FivexFiveSelected = true;
+            }
+            
+            if (x >= 158 && x <= 199 && y >= 764 && y <= 813) {
+                gameState.player1 = 0;
+                p1MaleSelected = true;
+                p1FemaleSelected = false;
+            } else if (x >= 224 && x <= 268 && y >= 764 && y <= 813) {
+                gameState.player1 = 1;
+                p1MaleSelected = false;
+                p1FemaleSelected = true;
+            }
+            
+            if (x >= 316 && x <= 357 && y >= 764 && y <= 813) {
+                gameState.player2 = 0;
+                p2MaleSelected = true;
+                p2FemaleSelected = false;
+            } else if (x >= 381 && x <= 425 && y >= 764 && y <= 813) {
+                gameState.player2 = 0;
+                p2MaleSelected = true;
+                p2FemaleSelected = false;
+            }
         }
         
-        // add if/else if conditionals for each of the sets
-        
+        if (x >= 98 && x <= 320 && y >= 621 && y <= 713) {
+            gameState.rounds = 1;
+            bestOf1Selected = true;
+            bestOf3Selected = false;
+            bestOf5Selected = false;
+        } else if (x >= 335 && x <= 557 && y >= 621 && y <= 713) {
+            gameState.rounds = 3;
+            bestOf1Selected = false;
+            bestOf3Selected = true;
+            bestOf5Selected = false;
+        } else if (x >= 572 && x <= 795 && y >= 621 && y <= 713) {
+            gameState.rounds = 5;
+            bestOf1Selected = false;
+            bestOf3Selected = false;
+            bestOf5Selected = true;
+        }
         repaint();
     }
     
