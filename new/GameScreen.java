@@ -78,4 +78,24 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     public Component getComponent(){
         return this;
     }
+    
+    public void mouseClicked(MouseEvent e){
+        
+    }
+    
+    public void mousePressed(MouseEvent e){
+        
+    }
+    
+    public void mouseReleased(MouseEvent e){
+        
+    }
+    
+    public void mouseEntered(MouseEvent e){
+        
+    }
+    
+    public void mouseExited(MouseEvent e){
+        
+    }
 }

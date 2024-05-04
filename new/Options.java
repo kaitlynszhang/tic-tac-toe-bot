@@ -20,6 +20,7 @@ public class Options extends JPanel implements Screen, MouseListener{
         ImageIcon optionsScreenBackground = new ImageIcon("options-page.png");
         backgroundLabel = new JLabel(optionsScreenBackground);
         add(backgroundLabel, BorderLayout.CENTER);
+        addMouseListener(this);
     }
     
     // here we set the visibility of the main screen to true and start any animations, music and etc
@@ -65,6 +66,14 @@ public class Options extends JPanel implements Screen, MouseListener{
         //board size
         //number of rounds
         //player select
+        
+        //continue
+        if (x >= 583 && x <= 743 && y >= 741 && y <= 839) {
+            Main.switchScreen(new GameScreen(gameState));
+        }
+        else if (x >= 720 && x <= 812 && y >= 771 && y <= 839) {
+            Main.switchScreen(new GameScreen(gameState));
+        }
     }
     
     public void mousePressed(MouseEvent e){
