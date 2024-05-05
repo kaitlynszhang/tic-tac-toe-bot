@@ -78,7 +78,7 @@ public class Options extends JPanel implements Screen, MouseListener{
             FivexFiveImage = ImageIO.read(new File("5x5.png"));
             
             bestOf1Image = ImageIO.read(new File("best of 1.png"));
-            bestOf3Image = ImageIO.read(new File("best of 2.png"));
+            bestOf3Image = ImageIO.read(new File("best of 3.png"));
             bestOf5Image = ImageIO.read(new File("best of 5.png"));
             
             p1MaleImage = ImageIO.read(new File("p1 male.png"));
@@ -297,23 +297,27 @@ public class Options extends JPanel implements Screen, MouseListener{
             }
             
             if (x >= 158 && x <= 199 && y >= 764 && y <= 813) {
+                System.out.println("Player 1 selected male");
                 gameState.player1 = 0;
                 p1MaleSelected = true;
                 p1FemaleSelected = false;
             } else if (x >= 224 && x <= 268 && y >= 764 && y <= 813) {
+                System.out.println("Player 1 selected female");
                 gameState.player1 = 1;
                 p1MaleSelected = false;
                 p1FemaleSelected = true;
             }
             
             if (x >= 316 && x <= 357 && y >= 764 && y <= 813) {
+                System.out.println("Player 2 selected male");
                 gameState.player2 = 0;
                 p2MaleSelected = true;
                 p2FemaleSelected = false;
             } else if (x >= 381 && x <= 425 && y >= 764 && y <= 813) {
+                System.out.println("Player 2 selected female");
                 gameState.player2 = 0;
-                p2MaleSelected = true;
-                p2FemaleSelected = false;
+                p2MaleSelected = false;
+                p2FemaleSelected = true;
             }
         }
         
@@ -334,6 +338,14 @@ public class Options extends JPanel implements Screen, MouseListener{
             bestOf5Selected = true;
         }
         repaint();
+        
+        // continue
+        if (x >= 583 && x <= 743 && y >= 741 && y <= 839) {
+            Main.switchScreen(new GameScreen(gameState));
+        }
+        else if (x >= 720 && x <= 812 && y >= 771 && y <= 839) {
+            Main.switchScreen(new GameScreen(gameState));
+        }
     }
     
     public void mousePressed(MouseEvent e){
