@@ -22,37 +22,49 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
         if (gameState.theme == "default") {
             ImageIcon mainScreenBackground = new ImageIcon("default-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "sunset") {
             ImageIcon mainScreenBackground = new ImageIcon("sunset-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "snowy") {
             ImageIcon mainScreenBackground = new ImageIcon("snowy-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "rainy") {
             ImageIcon mainScreenBackground = new ImageIcon("rainy-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "night") {
             ImageIcon mainScreenBackground = new ImageIcon("night-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "adventure") {
             ImageIcon mainScreenBackground = new ImageIcon("adventure-mainscreenbackground.gif");
             backgroundLabel = new JLabel(mainScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
     }
@@ -92,7 +104,7 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
         int y = e.getY();
         
         //theme selection
-        if (x >= 268 && x <= 322 && y >= 668 && y <= 722) {
+        if (x >= 268 && x <= 322 && y >= 648 && y <= 702) {
             if (gameState.theme == "sunset") {
                 gameState.theme = "default";
                 Main.switchScreen(new MainScreen(gameState));
@@ -102,7 +114,7 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
             }
         }
         
-        else if (x >= 346 && x <= 400 && y >= 668 && y <= 722) {
+        else if (x >= 346 && x <= 400 && y >= 648 && y <= 702) {
             if (gameState.theme == "snowy") {
                 gameState.theme = "default";
                 Main.switchScreen(new MainScreen(gameState));
@@ -112,7 +124,7 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
             }
         }
         
-        else if (x >= 423 && x <= 477 && y >= 668 && y <= 722) {
+        else if (x >= 423 && x <= 477 && y >= 648 && y <= 702) {
             if (gameState.theme == "rainy") {
                 gameState.theme = "default";
                 Main.switchScreen(new MainScreen(gameState));
@@ -122,7 +134,7 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
             }
         }
         
-        else if (x >= 501 && x <= 554 && y >= 668 && y <= 722) {
+        else if (x >= 501 && x <= 554 && y >= 648 && y <= 702) {
             if (gameState.theme == "night") {
                 gameState.theme = "default";
                 Main.switchScreen(new MainScreen(gameState));
@@ -132,7 +144,7 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
             }
         }
         
-        else if (x >= 578 && x <= 632 && y >= 668 && y <= 722) {
+        else if (x >= 578 && x <= 632 && y >= 648 && y <= 702) {
             if (gameState.theme == "adventure") {
                 gameState.theme = "default";
                 Main.switchScreen(new MainScreen(gameState));
@@ -143,47 +155,47 @@ public class MainScreen extends JPanel implements Screen, MouseListener {
         }
         
         //first rectangle of play button
-        if (x >= 310 && x <= 588 && y >= 506 && y <= 515) {
+        if (x >= 310 && x <= 588 && y >= 486 && y <= 495) {
             Main.switchScreen(new Options(gameState));
         }
         
         //second rectangle of play button
-        if (x >= 302 && x <= 596 && y >= 516 && y <= 524) {
+        if (x >= 302 && x <= 596 && y >= 496 && y <= 504) {
             Main.switchScreen(new Options(gameState));
         }
         
         //third rectangle of play button
-        if (x >= 293 && x <= 605 && y >= 524 && y <= 532) {
+        if (x >= 293 && x <= 605 && y >= 504 && y <= 512) {
             Main.switchScreen(new Options(gameState));
         }
         
         //fourth rectangle of play button
-        if (x >= 285 && x <= 614 && y >= 532 && y <= 550) {
+        if (x >= 285 && x <= 614 && y >= 512 && y <= 530) {
             Main.switchScreen(new Options(gameState));
         }
         
         // Play Button Big Rectangle (in the middle)
-        if (x >= 268 && x <= 631 && y >= 550 && y <= 594) {
+        if (x >= 268 && x <= 631 && y >= 530 && y <= 574) {
             Main.switchScreen(new Options(gameState));
         }
         
         //sixth rectangle of play button
-        if (x >= 284 && x <= 614 && y >= 594 && y <= 611) {
+        if (x >= 284 && x <= 614 && y >= 574 && y <= 591) {
             Main.switchScreen(new Options(gameState));
         }
         
         //seventh rectangle of play button
-        if (x >= 293 && x <= 605 && y >= 612 && y <= 620) {
+        if (x >= 293 && x <= 605 && y >= 592 && y <= 600) {
             Main.switchScreen(new Options(gameState));
         }
         
         //eigth rectangle of play button
-        if (x >= 302 && x <= 597 && y >= 621 && y <= 629) {
+        if (x >= 302 && x <= 597 && y >= 601 && y <= 609) {
             Main.switchScreen(new Options(gameState));
         }
         
         //ninth rectangle of play button
-        if (x >= 311 && x <= 588 && y >= 629 && y <= 637) {
+        if (x >= 311 && x <= 588 && y >= 609 && y <= 617) {
             Main.switchScreen(new Options(gameState));
         }
     }

@@ -19,37 +19,49 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         if (gameState.theme == "default") {
             ImageIcon gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "sunset") {
             ImageIcon gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "snowy") {
             ImageIcon gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "rainy") {
             ImageIcon gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "night") {
             ImageIcon gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
         else if (gameState.theme == "adventure") {
             ImageIcon gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
             backgroundLabel = new JLabel(gameScreenBackground);
-            add(backgroundLabel, BorderLayout.CENTER);
+            GridLayout layout = new GridLayout(1, 1);
+            setLayout(layout);
+            add(backgroundLabel);
             addMouseListener(this);
         }
     }

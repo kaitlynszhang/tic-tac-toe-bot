@@ -124,7 +124,6 @@ public class Options extends JPanel implements Screen, MouseListener{
         g.drawImage(background, 0, 0, this);
         if (onePlayerSelected) {
             g.drawImage(onePlayerImage, 0, 0, this);
-            // add if statement for each of the rest of the buttons (15)
             if (easyDifficultySelected) {
                 g.drawImage(easyDifficultyImage, 0, 0, this);
                 if (ThreexThreeSelected) {
@@ -209,7 +208,7 @@ public class Options extends JPanel implements Screen, MouseListener{
         int x = e.getX();
         int y = e.getY();
         System.out.println("mouse click detected at " + x + ", " + y);
-
+        // one and two player button
         if (x >= 98 && x <= 388 && y >= 204 && y <= 294) {
             gameState.players = 1;
             onePlayerSelected = true;
@@ -223,6 +222,7 @@ public class Options extends JPanel implements Screen, MouseListener{
         }
         
         if (onePlayerSelected) {
+            // difficulty buttons
             if (x >= 100 && x <= 190 && y >= 350 && y <= 440) {
                 gameState.difficulty = 0;
                 easyDifficultySelected = true;
@@ -239,7 +239,7 @@ public class Options extends JPanel implements Screen, MouseListener{
                 mediumDifficultySelected = false;
                 hardDifficultySelected = true;
             }
-            
+            // board size buttons
             if (x >= 98 && x <= 320 && y >= 485 && y <= 575) {
                 gameState.boardSize = 3;
                 ThreexThreeSelected = true;
@@ -256,7 +256,7 @@ public class Options extends JPanel implements Screen, MouseListener{
                 FourxFourSelected = false;
                 FivexFiveSelected = true;
             }
-            
+            // p1 gender buttons
             if (x >= 158 && x <= 199 && y >= 764 && y <= 813) {
                 gameState.player1 = 0;
                 p1MaleSelected = true;
@@ -269,6 +269,7 @@ public class Options extends JPanel implements Screen, MouseListener{
         }
     
         if (twoPlayerSelected) {
+            // dimensions buttons
             if (x >= 502 && x <= 646 && y >= 350 && y <= 440) {
                 gameState.mode = 2;
                 TwoDimSelected = true;
@@ -278,7 +279,7 @@ public class Options extends JPanel implements Screen, MouseListener{
                 TwoDimSelected = false;
                 ThreeDimSelected = true;
             }
-            
+            // board sizes buttons
             if (x >= 98 && x <= 320 && y >= 485 && y <= 575) {
                 gameState.boardSize = 3;
                 ThreexThreeSelected = true;
@@ -295,7 +296,7 @@ public class Options extends JPanel implements Screen, MouseListener{
                 FourxFourSelected = false;
                 FivexFiveSelected = true;
             }
-            
+            // p1 gender buttons
             if (x >= 158 && x <= 199 && y >= 764 && y <= 813) {
                 System.out.println("Player 1 selected male");
                 gameState.player1 = 0;
@@ -307,7 +308,7 @@ public class Options extends JPanel implements Screen, MouseListener{
                 p1MaleSelected = false;
                 p1FemaleSelected = true;
             }
-            
+            // p2 gender buttons
             if (x >= 316 && x <= 357 && y >= 764 && y <= 813) {
                 System.out.println("Player 2 selected male");
                 gameState.player2 = 0;
@@ -315,12 +316,12 @@ public class Options extends JPanel implements Screen, MouseListener{
                 p2FemaleSelected = false;
             } else if (x >= 381 && x <= 425 && y >= 764 && y <= 813) {
                 System.out.println("Player 2 selected female");
-                gameState.player2 = 0;
+                gameState.player2 = 1;
                 p2MaleSelected = false;
                 p2FemaleSelected = true;
             }
         }
-        
+        // number of rounds buttons
         if (x >= 98 && x <= 320 && y >= 621 && y <= 713) {
             gameState.rounds = 1;
             bestOf1Selected = true;
@@ -339,7 +340,7 @@ public class Options extends JPanel implements Screen, MouseListener{
         }
         repaint();
         
-        // continue
+        // continue button
         if (x >= 583 && x <= 743 && y >= 741 && y <= 839) {
             Main.switchScreen(new GameScreen(gameState));
         }
