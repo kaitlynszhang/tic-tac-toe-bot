@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class GameScreen extends JPanel implements Screen, MouseListener{
     
     private GameState gameState;
-    private JLabel backgroundLabel;
+    private ImageIcon gameScreenBackground;
     
     private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
     
@@ -31,66 +31,45 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         this.gameState = state;
         try {
             if (gameState.theme == "default") {
-                ImageIcon gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
                 
                 XImage = ImageIO.read(new File("default-x.png"));
                 OImage = ImageIO.read(new File("default-o.png"));
                 addMouseListener(this);
             }
             else if (gameState.theme == "sunset") {
-                ImageIcon gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
                 
                 XImage = ImageIO.read(new File("sunset-x.png"));
                 OImage = ImageIO.read(new File("sunset-o.png"));
                 addMouseListener(this);
             }
             else if (gameState.theme == "snowy") {
-                ImageIcon gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
                 
                 XImage = ImageIO.read(new File("snowy-x.png"));
                 OImage = ImageIO.read(new File("snowy-o.png"));
                 addMouseListener(this);
             }
             else if (gameState.theme == "rainy") {
-                ImageIcon gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
                 
                 XImage = ImageIO.read(new File("rainy-x.png"));
                 OImage = ImageIO.read(new File("rainy-o.png"));
                 addMouseListener(this);
             }
             else if (gameState.theme == "night") {
-                ImageIcon gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
                 
                 XImage = ImageIO.read(new File("night-x.png"));
                 OImage = ImageIO.read(new File("night-o.png"));
                 addMouseListener(this);
             }
             else if (gameState.theme == "adventure") {
-                ImageIcon gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
-                backgroundLabel = new JLabel(gameScreenBackground);
-                GridLayout layout = new GridLayout(1, 1);
-                setLayout(layout);
-                add(backgroundLabel);
+                gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
+                
+                XImage = ImageIO.read(new File("adventure-x.png"));
+                OImage = ImageIO.read(new File("adventure-o.png"));
                 addMouseListener(this);
             }
         } catch(IOException ex) {
@@ -127,10 +106,51 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        gameScreenBackground.paintIcon(this, g, 0, 0);
         if(grid.get(0) == "x") {
-            g.drawImage(XImage, 0, 0, this);
+            g.drawImage(XImage, 241, 241, this);
         } else if(grid.get(0) == "o") {
-            g.drawImage(OImage, 0, 0, this);
+            g.drawImage(OImage, 241, 241, this);
+        }
+        if(grid.get(1) == "x") {
+            g.drawImage(XImage, 396, 241, this);
+        } else if(grid.get(1) == "o") {
+            g.drawImage(OImage, 396, 241, this);
+        }
+        if(grid.get(2) == "x") {
+            g.drawImage(XImage, 551, 241, this);
+        } else if(grid.get(2) == "o") {
+            g.drawImage(OImage, 551, 241, this);
+        }
+        if(grid.get(3) == "x") {
+            g.drawImage(XImage, 241, 396, this);
+        } else if(grid.get(3) == "o") {
+            g.drawImage(OImage, 241, 396, this);
+        }
+        if(grid.get(4) == "x") {
+            g.drawImage(XImage, 396, 396, this);
+        } else if(grid.get(4) == "o") {
+            g.drawImage(OImage, 396, 396, this);
+        }
+        if(grid.get(5) == "x") {
+            g.drawImage(XImage, 551, 396, this);
+        } else if(grid.get(5) == "o") {
+            g.drawImage(OImage, 551, 396, this);
+        }
+        if(grid.get(6) == "x") {
+            g.drawImage(XImage, 241, 551, this);
+        } else if(grid.get(6) == "o") {
+            g.drawImage(OImage, 241, 551, this);
+        }
+        if(grid.get(7) == "x") {
+            g.drawImage(XImage, 396, 551, this);
+        } else if(grid.get(7) == "o") {
+            g.drawImage(OImage, 396, 551, this);
+        }
+        if(grid.get(8) == "x") {
+            g.drawImage(XImage, 551, 551, this);
+        } else if(grid.get(8) == "o") {
+            g.drawImage(OImage, 551, 551, this);
         }
     }
     
@@ -139,7 +159,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         int y = e.getY();
         System.out.println("mouse click detected at " + x + ", " + y);
         
-        if (x >= 229 && x <= 362 && y >= 209 && y <= 342) {
+        if (x >= 229 && x <= 362 && y >= 229 && y <= 362) {
             System.out.println("top left square clicked");
             if(player1Turn) {
                 if(grid.get(0) == "") {
@@ -152,7 +172,126 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                 }
             }
-
+        }
+        
+        if (x >= 384 && x <= 516 && y >= 229 && y <= 362) {
+            System.out.println("top middle square clicked");
+            if(player1Turn) {
+                if(grid.get(1) == "") {
+                    grid.set(1, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(1) == "") {
+                    grid.set(1, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 538 && x <= 671 && y >= 229 && y <= 362) {
+            System.out.println("top right square clicked");
+            if(player1Turn) {
+                if(grid.get(2) == "") {
+                    grid.set(2, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(2) == "") {
+                    grid.set(2, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 229 && x <= 362 && y >= 384 && y <= 516) {
+            System.out.println("middle left square clicked");
+            if(player1Turn) {
+                if(grid.get(3) == "") {
+                    grid.set(3, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(3) == "") {
+                    grid.set(3, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 384 && x <= 516 && y >= 384 && y <= 516) {
+            System.out.println("middle middle square clicked");
+            if(player1Turn) {
+                if(grid.get(4) == "") {
+                    grid.set(4, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(4) == "") {
+                    grid.set(4, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 538 && x <= 671 && y >= 384 && y <= 516) {
+            System.out.println("middle right square clicked");
+            if(player1Turn) {
+                if(grid.get(5) == "") {
+                    grid.set(5, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(5) == "") {
+                    grid.set(5, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 229 && x <= 362 && y >= 538 && y <= 671) {
+            System.out.println("bottom left square clicked");
+            if(player1Turn) {
+                if(grid.get(6) == "") {
+                    grid.set(6, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(6) == "") {
+                    grid.set(6, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 384 && x <= 516 && y >= 538 && y <= 671) {
+            System.out.println("bottom middle square clicked");
+            if(player1Turn) {
+                if(grid.get(7) == "") {
+                    grid.set(7, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(7) == "") {
+                    grid.set(7, "o");
+                    player1Turn = true;
+                }
+            }
+        }
+        
+        if (x >= 538 && x <= 671 && y >= 538 && y <= 671) {
+            System.out.println("bottom right square clicked");
+            if(player1Turn) {
+                if(grid.get(8) == "") {
+                    grid.set(8, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(8) == "") {
+                    grid.set(8, "o");
+                    player1Turn = true;
+                }
+            }
         }
         repaint();
     }
