@@ -21,91 +21,82 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private JLabel backgroundLabel;
     
     private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
-    private BufferedImage defaultXImage;
-    private BufferedImage defaultOImage;
-    private BufferedImage sunsetXImage;
-    private BufferedImage sunsetOImage;
-    private BufferedImage snowyXImage;
-    private BufferedImage snowyOImage;
-    private BufferedImage rainyXImage;
-    private BufferedImage rainyOImage;
-    private BufferedImage nightXImage;
-    private BufferedImage nightOImage;
-    private BufferedImage adventureXImage;
-    private BufferedImage adventureOImage;
+    
+    private Boolean player1Turn = true;
+    
+    private BufferedImage XImage;
+    private BufferedImage OImage;
     
     public GameScreen(GameState state) {
         this.gameState = state;
-        if (gameState.theme == "default") {
-            ImageIcon gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        else if (gameState.theme == "sunset") {
-            ImageIcon gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        else if (gameState.theme == "snowy") {
-            ImageIcon gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        else if (gameState.theme == "rainy") {
-            ImageIcon gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        else if (gameState.theme == "night") {
-            ImageIcon gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        else if (gameState.theme == "adventure") {
-            ImageIcon gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
-            backgroundLabel = new JLabel(gameScreenBackground);
-            GridLayout layout = new GridLayout(1, 1);
-            setLayout(layout);
-            add(backgroundLabel);
-            addMouseListener(this);
-        }
-        
         try {
-            defaultXImage = ImageIO.read(new File("default-x.png"));
-            defaultOImage = ImageIO.read(new File("default-o.png"));
-            
-            sunsetXImage = ImageIO.read(new File("sunset-x.png"));
-            sunsetOImage = ImageIO.read(new File("sunset-o.png"));
-            
-            snowyXImage = ImageIO.read(new File("snowy-x.png"));
-            snowyOImage = ImageIO.read(new File("snowy-o.png"));
-            
-            rainyXImage = ImageIO.read(new File("rainy-x.png"));
-            rainyOImage = ImageIO.read(new File("rainy-o.png"));
-            
-            nightXImage = ImageIO.read(new File("night-x.png"));
-            nightOImage = ImageIO.read(new File("night-o.png"));
-            
-            adventureXImage = ImageIO.read(new File("adventure-x.png"));
-            adventureOImage = ImageIO.read(new File("adventure-o.png"));
-        } catch (IOException ex) {
+            if (gameState.theme == "default") {
+                ImageIcon gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                
+                XImage = ImageIO.read(new File("default-x.png"));
+                OImage = ImageIO.read(new File("default-o.png"));
+                addMouseListener(this);
+            }
+            else if (gameState.theme == "sunset") {
+                ImageIcon gameScreenBackground = new ImageIcon("sunset-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                
+                XImage = ImageIO.read(new File("sunset-x.png"));
+                OImage = ImageIO.read(new File("sunset-o.png"));
+                addMouseListener(this);
+            }
+            else if (gameState.theme == "snowy") {
+                ImageIcon gameScreenBackground = new ImageIcon("snowy-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                
+                XImage = ImageIO.read(new File("snowy-x.png"));
+                OImage = ImageIO.read(new File("snowy-o.png"));
+                addMouseListener(this);
+            }
+            else if (gameState.theme == "rainy") {
+                ImageIcon gameScreenBackground = new ImageIcon("rainy-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                
+                XImage = ImageIO.read(new File("rainy-x.png"));
+                OImage = ImageIO.read(new File("rainy-o.png"));
+                addMouseListener(this);
+            }
+            else if (gameState.theme == "night") {
+                ImageIcon gameScreenBackground = new ImageIcon("night-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                
+                XImage = ImageIO.read(new File("night-x.png"));
+                OImage = ImageIO.read(new File("night-o.png"));
+                addMouseListener(this);
+            }
+            else if (gameState.theme == "adventure") {
+                ImageIcon gameScreenBackground = new ImageIcon("adventure-gamescreenbackground.gif");
+                backgroundLabel = new JLabel(gameScreenBackground);
+                GridLayout layout = new GridLayout(1, 1);
+                setLayout(layout);
+                add(backgroundLabel);
+                addMouseListener(this);
+            }
+        } catch(IOException ex) {
             ex.printStackTrace();
         }
+        
     }
     
     // here i set the visibility of the main screen to true and start any animations, music and etc
@@ -133,6 +124,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         return this;
     }
     
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(grid.get(0) == "x") {
+            g.drawImage(XImage, 0, 0, this);
+        } else if(grid.get(0) == "o") {
+            g.drawImage(OImage, 0, 0, this);
+        }
+    }
+    
     public void mouseClicked(MouseEvent e){
         int x = e.getX();
         int y = e.getY();
@@ -140,7 +141,20 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 229 && x <= 362 && y >= 209 && y <= 342) {
             System.out.println("top left square clicked");
+            if(player1Turn) {
+                if(grid.get(0) == "") {
+                    grid.set(0, "x");
+                    player1Turn = false;
+                }
+            } else {
+                if(grid.get(0) == "") {
+                    grid.set(0, "o");
+                    player1Turn = true;
+                }
+            }
+
         }
+        repaint();
     }
     
     public void mousePressed(MouseEvent e){
