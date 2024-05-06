@@ -14,18 +14,28 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class GameScreen extends JPanel implements Screen, MouseListener{
     
-    private GameState gameState;
-    private ImageIcon gameScreenBackground;
-    
+    private GameState gameState;    
     private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
     
     private Boolean player1Turn = true;
     
     private BufferedImage XImage;
     private BufferedImage OImage;
+    private BufferedImage player1Icon;
+    private BufferedImage player2Icon;
+    private BufferedImage score0Icon;
+    private BufferedImage score1Icon;
+    private BufferedImage score2Icon;
+    private BufferedImage score3Icon;
+    private BufferedImage scoreLine;
+    
+    private ImageIcon gameScreenBackground;
+    private ImageIcon player1Avatar;
+    private ImageIcon player2Avatar;
     
     public GameScreen(GameState state) {
         this.gameState = state;
@@ -72,6 +82,34 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                 OImage = ImageIO.read(new File("adventure-o.png"));
                 addMouseListener(this);
             }
+            
+            if (gameState.players == 1) {
+                if (gameState.player1 == 0) {
+                    player1Icon = ImageIO.read(new File("male-icon.png"));
+                    player1Avatar = new ImageIcon("male-avatar.gif");
+                } else if (gameState.player1 == 1) {
+                    player1Icon = ImageIO.read(new File("female-icon.png"));
+                    player1Avatar = new ImageIcon("female-avatar.gif");
+                }
+                player2Icon = ImageIO.read(new File("robot-icon.png"));
+                player2Avatar = new ImageIcon("robot-avatar.gif");
+            } else if (gameState.players == 2) {
+                if (gameState.player1 == 0) {
+                    player1Icon = ImageIO.read(new File("male-icon.png"));
+                    player1Avatar = new ImageIcon("male-avatar.gif");
+                } else if (gameState.player1 == 1) {
+                    player1Icon = ImageIO.read(new File("female-icon.png"));
+                    player1Avatar = new ImageIcon("female-avatar.gif");
+                }
+                if (gameState.player2 == 0) {
+                    player2Icon = ImageIO.read(new File("male-icon.png"));
+                    player2Avatar = new ImageIcon("male-avatar-flipped.gif");
+                } else if (gameState.player2 == 1) {
+                    player2Icon = ImageIO.read(new File("female-icon.png"));
+                    player2Avatar = new ImageIcon("female-avatar.gif");
+                }
+            }
+            scoreLine = ImageIO.read(new File("score-line.png"));
         } catch(IOException ex) {
             ex.printStackTrace();
         }
@@ -107,6 +145,12 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         gameScreenBackground.paintIcon(this, g, 0, 0);
+        player1Avatar.paintIcon(this, g, 11, 335);
+        player2Avatar.paintIcon(this, g, 698, 335);
+        
+        g.drawImage(player1Icon, 287, 65, this);
+        g.drawImage(player2Icon, 555, 65, this);
+        g.drawImage(scoreLine, 0, 0, this);
         if(grid.get(0) == "x") {
             g.drawImage(XImage, 241, 241, this);
         } else if(grid.get(0) == "o") {
@@ -310,5 +354,148 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     
     public void mouseExited(MouseEvent e){
         
+    }
+    
+    public int findBestMove(ArrayList<String> grid, int difficulty) {
+        if (difficulty == 0) {
+            return findRandomMove(grid);
+        } else if (difficulty == 1) {
+            return findMediumMove(grid);
+        } else if (difficulty == 2) {
+            return findHardMove(grid);
+        }
+        return -1;
+    }
+
+    private int findRandomMove(ArrayList<String> grid) {
+        Random rand = new Random();
+        ArrayList<Integer> emptyPositions = new ArrayList<>();
+        for (int i = 0; i < grid.size(); i++) {
+            if (grid.get(i).equals("")) {
+                emptyPositions.add(i);
+            }
+        }
+        if (emptyPositions.isEmpty()) {
+            return -1;
+        }
+        return emptyPositions.get(rand.nextInt(emptyPositions.size()));
+    }
+
+    private int findMediumMove(ArrayList<String> grid) {
+        int move = findWinningMove(grid, "x");
+        if (move != -1) {
+            return move;
+        }
+        return findRandomMove(grid);
+    }
+
+    private int findWinningMove(ArrayList<String> grid, String player) {
+        for (int i = 0; i < grid.size(); i++) {
+            if (grid.get(i).equals("")) {
+                grid.set(i, player);
+                if (isWinning(grid, player)) {
+                    grid.set(i, "");
+                    return i;
+                }
+                grid.set(i, "");
+            }
+        }
+        return -1;
+    }
+
+    private boolean isWinning(ArrayList<String> grid, String player) {
+        for (int i = 0; i < 3; i++) {
+            if (grid.get(i * 3).equals(player) && grid.get(i * 3 + 1).equals(player) && grid.get(i * 3 + 2).equals(player)) {
+                return true;
+            }
+            if (grid.get(i).equals(player) && grid.get(i + 3).equals(player) && grid.get(i + 6).equals(player)) {
+                return true;
+            }
+        }
+        if (grid.get(0).equals(player) && grid.get(4).equals(player) && grid.get(8).equals(player)) {
+            return true;
+        }
+        if (grid.get(2).equals(player) && grid.get(4).equals(player) && grid.get(6).equals(player)) {
+            return true;
+        }
+        return false;
+    }
+
+    private int findHardMove(ArrayList<String> grid) {
+        int bestScore = Integer.MIN_VALUE;
+        int bestMove = -1;
+
+        for (int i = 0; i < grid.size(); i++) {
+            if (grid.get(i).equals("")) {
+                grid.set(i, "o");
+                int score = minimax(grid, 0, false);
+                grid.set(i, "");
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    private int minimax(ArrayList<String> grid, int depth, boolean isMaximizing) {
+        String result = checkWinner(grid);
+        if (result.equals("x")) return -10;
+        if (result.equals("o")) return 10;
+        if (result.equals("draw")) return 0;
+
+        if (isMaximizing) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < grid.size(); i++) {
+                if (grid.get(i).equals("")) {
+                    grid.set(i, "o");
+                    int score = minimax(grid, depth + 1, false);
+                    grid.set(i, "");
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < grid.size(); i++) {
+                if (grid.get(i).equals("")) {
+                    grid.set(i, "x");
+                    int score = minimax(grid, depth + 1, true);
+                    grid.set(i, "");
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
+        }
+    }
+    
+    private String checkWinner(ArrayList<String> grid) {
+        for (int i = 0; i < 3; i++) {
+            if (!grid.get(i * 3).equals("") && grid.get(i * 3).equals(grid.get(i * 3 + 1)) && grid.get(i * 3 + 1).equals(grid.get(i * 3 + 2))) {
+                return grid.get(i * 3);
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            if (!grid.get(i).equals("") && grid.get(i).equals(grid.get(i + 3)) && grid.get(i + 3).equals(grid.get(i + 6))) {
+                return grid.get(i);
+            }
+        }
+
+        if (!grid.get(0).equals("") && grid.get(0).equals(grid.get(4)) && grid.get(4).equals(grid.get(8))) {
+            return grid.get(0);
+        }
+        if (!grid.get(2).equals("") && grid.get(2).equals(grid.get(4)) && grid.get(4).equals(grid.get(6))) {
+            return grid.get(2);
+        }
+
+        for (int i = 0; i < grid.size(); i++) {
+            if (grid.get(i).equals("")) {
+                return "";
+            }
+        }
+
+        return "draw";
     }
 }
