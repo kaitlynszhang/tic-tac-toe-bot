@@ -36,10 +36,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private ImageIcon gameScreenBackground;
     private ImageIcon player1Avatar;
     private ImageIcon player2Avatar;
+    private ImageIcon player1MaleWin;
+    private ImageIcon player1FemaleWin;
+    private ImageIcon player2MaleWin;
+    private ImageIcon player2FemaleWin;
+    private ImageIcon playerMaleWinAgainstRobot;
+    private ImageIcon playerFemaleWinAgainstRobot;
+    private ImageIcon RobotWin;
 
     private int turnNumber = 1;
 
-    
     public GameScreen(GameState state) {
         this.gameState = state;
         // determining which player moves first depending on which round it is
@@ -49,7 +55,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
             player1Turn = false;
         }
 
-        // importing all of the required assets and mouselistener
+        // importing all of the required images/gifs and mouselistener
         try {
             if (gameState.theme == "default") {
                 gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
@@ -121,12 +127,23 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                 }
             }
             scoreLine = ImageIO.read(new File("score-line.png"));
+            score0Icon = ImageIO.read(new File("score-0.png"));
+            score1Icon = ImageIO.read(new File("score-1.png"));
+            score2Icon = ImageIO.read(new File("score-2.png"));
+            score3Icon = ImageIO.read(new File("score-3.png"));
+            
+            player1MaleWin = new ImageIcon("player1-male-win.gif");
+            player1FemaleWin = new ImageIcon("player1-female-win.gif");
+            player2MaleWin = new ImageIcon("player2-male-win.gif");
+            player2FemaleWin = new ImageIcon("player2-female-win.gif");
+            playerMaleWinAgainstRobot = new ImageIcon("player-win-male.gif");
+            playerFemaleWinAgainstRobot = new ImageIcon("player-win-female.gif");
+            RobotWin = new ImageIcon("robot-win.gif");
         } catch(IOException ex) {
             ex.printStackTrace();
         }
-        
     }
-    
+ 
     // here i set the visibility of the main screen to true and start any animations, music and etc
     public void showScreen() {
         this.setVisible(true);
@@ -148,15 +165,17 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     }
     
     @Override
+    //
     public Component getComponent(){
         return this;
     }
     
     @Override
+    // used to paint all the components of the screen, including background, players, and score. all the visuals:
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(!(gameState.scorePlayer1 == (gameState.rounds/2+1)) && !(gameState.scorePlayer2 == (gameState.rounds/2+1))) {
+        if(!(gameState.scorePlayer1 == (gameState.rounds/2+1)) || !(gameState.scorePlayer2 == (gameState.rounds/2+1))) {
             gameScreenBackground.paintIcon(this, g, 0, 0);
             player1Avatar.paintIcon(this, g, 11, 335);
             player2Avatar.paintIcon(this, g, 698, 335);
@@ -210,39 +229,42 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                 g.drawImage(OImage, 551, 551, this);
             }
 
-            
             if (gameState.scorePlayer1 == 0) {
-
+                g.drawImage(score0Icon, 351, 54, this);
             } else if (gameState.scorePlayer1 == 1) {
-                
+                g.drawImage(score1Icon, 351, 54, this);
             } else if (gameState.scorePlayer1 == 2) {
-                
+                g.drawImage(score2Icon, 351, 54, this);
             } else if (gameState.scorePlayer1 == 3) {
-                
+                g.drawImage(score3Icon, 351, 54, this);
             }
 
             if (gameState.scorePlayer2 == 0) {
-
+                g.drawImage(score0Icon, 482, 54, this);
             } else if (gameState.scorePlayer2 == 1) {
-                
+                g.drawImage(score1Icon, 482, 54, this);
             } else if (gameState.scorePlayer2 == 2) {
-                
+                g.drawImage(score2Icon, 482, 54, this);
             } else if (gameState.scorePlayer2 == 3) {
-                
+                g.drawImage(score3Icon, 482, 54, this);
             }
         }
 
-        // checking player win
+        // showing win/lose screens if the score does equal the number of rounds needed to win
         if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 0) {
-
+            player1MaleWin.paintIcon(this, g, 0, 0);
         } else if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 1) {
-
+            player1FemaleWin.paintIcon(this, g, 0, 0);
         } else if (gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 2 && gameState.player2 == 0) {
-
+            player2MaleWin.paintIcon(this, g, 0, 0);
         } else if (gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 2 && gameState.player2 == 1) {
-            
+            player2FemaleWin.paintIcon(this, g, 0, 0);
         } else if(gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 1) {
-
+            RobotWin.paintIcon(this, g, 0, 0);
+        } else if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 0 && gameState.players == 1) {
+            playerMaleWinAgainstRobot.paintIcon(this, g, 0, 0);
+        } else if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 1 && gameState.players == 1) {
+            playerFemaleWinAgainstRobot.paintIcon(this, g, 0, 0);
         }
 
     }
