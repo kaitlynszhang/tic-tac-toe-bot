@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.Color.*;
 import java.awt.event.*;
 import java.net.URL.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +21,18 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private JLabel backgroundLabel;
     
     private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
+    private BufferedImage defaultXImage;
+    private BufferedImage defaultOImage;
+    private BufferedImage sunsetXImage;
+    private BufferedImage sunsetOImage;
+    private BufferedImage snowyXImage;
+    private BufferedImage snowyOImage;
+    private BufferedImage rainyXImage;
+    private BufferedImage rainyOImage;
+    private BufferedImage nightXImage;
+    private BufferedImage nightOImage;
+    private BufferedImage adventureXImage;
+    private BufferedImage adventureOImage;
     
     public GameScreen(GameState state) {
         this.gameState = state;
@@ -68,6 +84,28 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
             add(backgroundLabel);
             addMouseListener(this);
         }
+        
+        try {
+            defaultXImage = ImageIO.read(new File("default-x.png"));
+            defaultOImage = ImageIO.read(new File("default-o.png"));
+            
+            sunsetXImage = ImageIO.read(new File("sunset-x.png"));
+            sunsetOImage = ImageIO.read(new File("sunset-o.png"));
+            
+            snowyXImage = ImageIO.read(new File("snowy-x.png"));
+            snowyOImage = ImageIO.read(new File("snowy-o.png"));
+            
+            rainyXImage = ImageIO.read(new File("rainy-x.png"));
+            rainyOImage = ImageIO.read(new File("rainy-o.png"));
+            
+            nightXImage = ImageIO.read(new File("night-x.png"));
+            nightOImage = ImageIO.read(new File("night-o.png"));
+            
+            adventureXImage = ImageIO.read(new File("adventure-x.png"));
+            adventureOImage = ImageIO.read(new File("adventure-o.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     // here i set the visibility of the main screen to true and start any animations, music and etc
@@ -99,6 +137,10 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         int x = e.getX();
         int y = e.getY();
         System.out.println("mouse click detected at " + x + ", " + y);
+        
+        if (x >= 229 && x <= 362 && y >= 209 && y <= 342) {
+            System.out.println("top left square clicked");
+        }
     }
     
     public void mousePressed(MouseEvent e){
