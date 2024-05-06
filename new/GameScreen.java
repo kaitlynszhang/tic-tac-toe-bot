@@ -21,7 +21,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private GameState gameState;    
     private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
     
-    private Boolean player1Turn = true;
+    private Boolean player1Turn;
     
     private BufferedImage XImage;
     private BufferedImage OImage;
@@ -36,9 +36,20 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private ImageIcon gameScreenBackground;
     private ImageIcon player1Avatar;
     private ImageIcon player2Avatar;
+
+    private int turnNumber = 1;
+
     
     public GameScreen(GameState state) {
         this.gameState = state;
+        // determining which player moves first depending on which round it is
+        if (gameState.roundNumber % 2 == 1) {
+            player1Turn = true;
+        } else {
+            player1Turn = false;
+        }
+
+        // importing all of the required assets and mouselistener
         try {
             if (gameState.theme == "default") {
                 gameScreenBackground = new ImageIcon("default-gamescreenbackground.gif");
@@ -144,65 +155,103 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        gameScreenBackground.paintIcon(this, g, 0, 0);
-        player1Avatar.paintIcon(this, g, 11, 335);
-        player2Avatar.paintIcon(this, g, 698, 335);
-        
-        g.drawImage(player1Icon, 287, 65, this);
-        g.drawImage(player2Icon, 555, 65, this);
-        g.drawImage(scoreLine, 0, 0, this);
-        if(grid.get(0) == "x") {
-            g.drawImage(XImage, 241, 241, this);
-        } else if(grid.get(0) == "o") {
-            g.drawImage(OImage, 241, 241, this);
+
+        if(!(gameState.scorePlayer1 == (gameState.rounds/2+1)) && !(gameState.scorePlayer2 == (gameState.rounds/2+1))) {
+            gameScreenBackground.paintIcon(this, g, 0, 0);
+            player1Avatar.paintIcon(this, g, 11, 335);
+            player2Avatar.paintIcon(this, g, 698, 335);
+            
+            g.drawImage(player1Icon, 287, 65, this);
+            g.drawImage(player2Icon, 555, 65, this);
+            g.drawImage(scoreLine, 0, 0, this);
+            if(grid.get(0) == "x") {
+                g.drawImage(XImage, 241, 241, this);
+            } else if(grid.get(0) == "o") {
+                g.drawImage(OImage, 241, 241, this);
+            }
+            if(grid.get(1) == "x") {
+                g.drawImage(XImage, 396, 241, this);
+            } else if(grid.get(1) == "o") {
+                g.drawImage(OImage, 396, 241, this);
+            }
+            if(grid.get(2) == "x") {
+                g.drawImage(XImage, 551, 241, this);
+            } else if(grid.get(2) == "o") {
+                g.drawImage(OImage, 551, 241, this);
+            }
+            if(grid.get(3) == "x") {
+                g.drawImage(XImage, 241, 396, this);
+            } else if(grid.get(3) == "o") {
+                g.drawImage(OImage, 241, 396, this);
+            }
+            if(grid.get(4) == "x") {
+                g.drawImage(XImage, 396, 396, this);
+            } else if(grid.get(4) == "o") {
+                g.drawImage(OImage, 396, 396, this);
+            }
+            if(grid.get(5) == "x") {
+                g.drawImage(XImage, 551, 396, this);
+            } else if(grid.get(5) == "o") {
+                g.drawImage(OImage, 551, 396, this);
+            }
+            if(grid.get(6) == "x") {
+                g.drawImage(XImage, 241, 551, this);
+            } else if(grid.get(6) == "o") {
+                g.drawImage(OImage, 241, 551, this);
+            }
+            if(grid.get(7) == "x") {
+                g.drawImage(XImage, 396, 551, this);
+            } else if(grid.get(7) == "o") {
+                g.drawImage(OImage, 396, 551, this);
+            }
+            if(grid.get(8) == "x") {
+                g.drawImage(XImage, 551, 551, this);
+            } else if(grid.get(8) == "o") {
+                g.drawImage(OImage, 551, 551, this);
+            }
+
+            
+            if (gameState.scorePlayer1 == 0) {
+
+            } else if (gameState.scorePlayer1 == 1) {
+                
+            } else if (gameState.scorePlayer1 == 2) {
+                
+            } else if (gameState.scorePlayer1 == 3) {
+                
+            }
+
+            if (gameState.scorePlayer2 == 0) {
+
+            } else if (gameState.scorePlayer2 == 1) {
+                
+            } else if (gameState.scorePlayer2 == 2) {
+                
+            } else if (gameState.scorePlayer2 == 3) {
+                
+            }
         }
-        if(grid.get(1) == "x") {
-            g.drawImage(XImage, 396, 241, this);
-        } else if(grid.get(1) == "o") {
-            g.drawImage(OImage, 396, 241, this);
+
+        // checking player win
+        if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 0) {
+
+        } else if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) && gameState.player1 == 1) {
+
+        } else if (gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 2 && gameState.player2 == 0) {
+
+        } else if (gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 2 && gameState.player2 == 1) {
+            
+        } else if(gameState.scorePlayer2 == (gameState.rounds/2 + 1) && gameState.players == 1) {
+
         }
-        if(grid.get(2) == "x") {
-            g.drawImage(XImage, 551, 241, this);
-        } else if(grid.get(2) == "o") {
-            g.drawImage(OImage, 551, 241, this);
-        }
-        if(grid.get(3) == "x") {
-            g.drawImage(XImage, 241, 396, this);
-        } else if(grid.get(3) == "o") {
-            g.drawImage(OImage, 241, 396, this);
-        }
-        if(grid.get(4) == "x") {
-            g.drawImage(XImage, 396, 396, this);
-        } else if(grid.get(4) == "o") {
-            g.drawImage(OImage, 396, 396, this);
-        }
-        if(grid.get(5) == "x") {
-            g.drawImage(XImage, 551, 396, this);
-        } else if(grid.get(5) == "o") {
-            g.drawImage(OImage, 551, 396, this);
-        }
-        if(grid.get(6) == "x") {
-            g.drawImage(XImage, 241, 551, this);
-        } else if(grid.get(6) == "o") {
-            g.drawImage(OImage, 241, 551, this);
-        }
-        if(grid.get(7) == "x") {
-            g.drawImage(XImage, 396, 551, this);
-        } else if(grid.get(7) == "o") {
-            g.drawImage(OImage, 396, 551, this);
-        }
-        if(grid.get(8) == "x") {
-            g.drawImage(XImage, 551, 551, this);
-        } else if(grid.get(8) == "o") {
-            g.drawImage(OImage, 551, 551, this);
-        }
+
     }
     
     public void mouseClicked(MouseEvent e){
         int x = e.getX();
         int y = e.getY();
         System.out.println("mouse click detected at " + x + ", " + y);
-        
+
         if (x >= 229 && x <= 362 && y >= 229 && y <= 362) {
             System.out.println("top left square clicked");
             if(player1Turn) {
@@ -337,6 +386,21 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                 }
             }
         }
+
+        if(player1Turn) {
+            if(isWinning(grid, "o")) {
+                gameState.scorePlayer2 += 1;
+                gameState.roundNumber += 1;
+                Main.switchScreen(new GameScreen(gameState));
+            }
+        } else {
+            if(isWinning(grid, "x")) {
+                gameState.scorePlayer1 += 1;
+                gameState.roundNumber += 1;
+                Main.switchScreen(new GameScreen(gameState));
+            }
+        }
+
         repaint();
     }
     

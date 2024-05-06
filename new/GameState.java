@@ -7,4 +7,7 @@ public class GameState {
     int player1; //0 for male, 1 for female
     int player2; //0 for male, 1 for female
     String theme; // sunset, snowy, rainy, night, adventure
+    int roundNumber = 1; // for keeping track of which round we are on
+    int scorePlayer1 = 0;
+    int scorePlayer2 = 0;
 }
