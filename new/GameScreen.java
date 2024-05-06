@@ -8,11 +8,15 @@ import java.awt.*;
 import java.awt.Color.*;
 import java.awt.event.*;
 import java.net.URL.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameScreen extends JPanel implements Screen, MouseListener{
     
     private GameState gameState;
     private JLabel backgroundLabel;
+    
+    private ArrayList<String> grid = new ArrayList<String>(Arrays.asList("", "", "", "", "", "", "", "", ""));
     
     public GameScreen(GameState state) {
         this.gameState = state;
@@ -92,7 +96,9 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     }
     
     public void mouseClicked(MouseEvent e){
-        
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println("mouse click detected at " + x + ", " + y);
     }
     
     public void mousePressed(MouseEvent e){
