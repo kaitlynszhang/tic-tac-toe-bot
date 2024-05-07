@@ -52,9 +52,11 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         if (gameState.roundNumber % 2 == 1) {
             player1Turn = true;
         } else {
-            player1Turn = false;
+            grid.set(findBestMove(grid, gameState.difficulty), "o");
+            player1Turn = true;
+            turnNumber += 1;
         }
-
+        
         // importing all of the required images/gifs and mouselistener
         try {
             if (gameState.theme == "default") {
@@ -240,13 +242,13 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
             }
 
             if (gameState.scorePlayer2 == 0) {
-                g.drawImage(score0Icon, 482, 54, this);
+                g.drawImage(score0Icon, 472, 54, this);
             } else if (gameState.scorePlayer2 == 1) {
-                g.drawImage(score1Icon, 482, 54, this);
+                g.drawImage(score1Icon, 472, 54, this);
             } else if (gameState.scorePlayer2 == 2) {
-                g.drawImage(score2Icon, 482, 54, this);
+                g.drawImage(score2Icon, 472, 54, this);
             } else if (gameState.scorePlayer2 == 3) {
-                g.drawImage(score3Icon, 482, 54, this);
+                g.drawImage(score3Icon, 472, 54, this);
             }
         }
 
@@ -273,14 +275,43 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         int x = e.getX();
         int y = e.getY();
         System.out.println("mouse click detected at " + x + ", " + y);
+        
+        if (gameState.scorePlayer1 == (gameState.rounds/2 + 1) || gameState.scorePlayer2 == (gameState.rounds/2 + 1)) {
+            if (x >= 296 && x <= 597 && y >= 289 && y <= 384) {
+                gameState.roundNumber = 1;
+                gameState.scorePlayer1 = 0;
+                gameState.scorePlayer2 = 0;
+                Main.switchScreen(new GameScreen(gameState));
+            } else if (x >= 296 && x <= 597 && y >= 400 && y <= 490) {
+                gameState.players = -1;
+                gameState.mode = -1;
+                gameState.boardSize = -1;
+                gameState.difficulty = -1;
+                gameState.rounds = -1;
+                gameState.player1 = -1;
+                gameState.player2 = -1;
+                gameState.roundNumber = 1;
+                gameState.scorePlayer1 = 0;
+                gameState.scorePlayer2 = 0;
+                Main.switchScreen(new Options(gameState));
+            } else if (x >= 296 && x <= 597 && y >= 510 && y <= 600) {
+                Main.frame.dispose();
+                System.exit(0); 
+            }
+        }
 
         if (x >= 229 && x <= 362 && y >= 229 && y <= 362) {
             System.out.println("top left square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(0) == "") {
                     grid.set(0, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(0) == "") {
@@ -288,7 +319,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -297,11 +328,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 384 && x <= 516 && y >= 229 && y <= 362) {
             System.out.println("top middle square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(1) == "") {
                     grid.set(1, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(1) == "") {
@@ -309,7 +345,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -318,11 +354,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 538 && x <= 671 && y >= 229 && y <= 362) {
             System.out.println("top right square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(2) == "") {
                     grid.set(2, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(2) == "") {
@@ -330,7 +371,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -339,11 +380,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 229 && x <= 362 && y >= 384 && y <= 516) {
             System.out.println("middle left square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(3) == "") {
                     grid.set(3, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(3) == "") {
@@ -351,7 +397,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -360,11 +406,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 384 && x <= 516 && y >= 384 && y <= 516) {
             System.out.println("middle middle square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(4) == "") {
                     grid.set(4, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(4) == "") {
@@ -372,7 +423,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -381,11 +432,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 538 && x <= 671 && y >= 384 && y <= 516) {
             System.out.println("middle right square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(5) == "") {
                     grid.set(5, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(5) == "") {
@@ -393,7 +449,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -402,11 +458,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 229 && x <= 362 && y >= 538 && y <= 671) {
             System.out.println("bottom left square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(6) == "") {
                     grid.set(6, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(6) == "") {
@@ -414,7 +475,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -423,11 +484,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 384 && x <= 516 && y >= 538 && y <= 671) {
             System.out.println("bottom middle square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(7) == "") {
                     grid.set(7, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(7) == "") {
@@ -435,7 +501,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            } else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
@@ -444,11 +510,16 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
         
         if (x >= 538 && x <= 671 && y >= 538 && y <= 671) {
             System.out.println("bottom right square clicked");
-            if(!player1Turn) {
+            if(player1Turn) {
                 if(grid.get(8) == "") {
                     grid.set(8, "x");
                     player1Turn = false;
                     turnNumber += 1;
+                    if (gameState.players == 1 && !isWinning(grid, "x") && turnNumber < 9) {
+                        grid.set(findBestMove(grid, gameState.difficulty), "o");
+                        player1Turn = true;
+                        turnNumber += 1;
+                    }
                 }
             } else if (gameState.players == 2) {
                 if(grid.get(8) == "") {
@@ -456,42 +527,43 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
                     player1Turn = true;
                     turnNumber += 1;
                 }
-            } else if (gameState.players == 1) {
+            }  else if(gameState.players == 1 && !player1Turn) {
                 grid.set(findBestMove(grid, gameState.difficulty), "o");
                 player1Turn = true;
                 turnNumber += 1;
             }
         }
 
-        if(player1Turn) {
-            if(isWinning(grid, "o")) {
-                gameState.scorePlayer2 += 1;
-                gameState.roundNumber += 1;
-                delay(1500, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Main.switchScreen(new GameScreen(gameState));
-                    }
-                });
-            }
-        } else {
-            if(isWinning(grid, "x")) {
-                gameState.scorePlayer1 += 1;
-                gameState.roundNumber += 1;
-                delay(1500, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Main.switchScreen(new GameScreen(gameState));
-                    }
-                });
-            }
+        
+        if(isWinning(grid, "o")) {
+            gameState.scorePlayer2 += 1;
+            gameState.roundNumber += 1;
+            delay(1500, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Main.switchScreen(new GameScreen(gameState));
+                }
+            });
+        }
+            
+        if(isWinning(grid, "x")) {
+            gameState.scorePlayer1 += 1;
+            gameState.roundNumber += 1;
+            delay(1500, new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Main.switchScreen(new GameScreen(gameState));
+                }
+            });
         }
 
-        if (turnNumber == 9) {
+        if (turnNumber >= 9) {
                 delay(1500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Main.switchScreen(new GameScreen(gameState));
                     }
                 });
         }
+        
+        System.out.println("turn number is: " + turnNumber);
         repaint();
     }
 

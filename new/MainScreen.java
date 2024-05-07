@@ -9,9 +9,7 @@ import java.awt.Color.*;
 import java.awt.event.*;
 import java.net.URL.*;
 
-
 public class MainScreen extends JPanel implements Screen, MouseListener {
-
     private GameState gameState;
     private JLabel backgroundLabel;
     

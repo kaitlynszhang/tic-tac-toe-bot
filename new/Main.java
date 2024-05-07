@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 public class Main
 {
-    private static JFrame frame;
+    public static JFrame frame;
     private static Screen currentScreen;
     private static GameState gameState;
     
@@ -15,7 +15,7 @@ public class Main
         switchScreen(new MainScreen(gameState));
     }
     
-    private static void initializeFrame() {
+    public static void initializeFrame() {
         frame = new JFrame();
         frame.setBounds(0, 0, 900, 900);
         frame.setTitle("Tic Tac Toe! by Kaitlyn Zhang");

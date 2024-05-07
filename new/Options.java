@@ -342,12 +342,16 @@ public class Options extends JPanel implements Screen, MouseListener{
         
         // continue button
         if (x >= 583 && x <= 743 && y >= 741 && y <= 839) {
-            if (gameState.players != -1 && gameState.mode != -1 && gameState.rounds != -1 && gameState.player1 != -1) {
+            if (gameState.players == 1 && gameState.rounds != -1 && gameState.player1 != -1) {
                 Main.switchScreen(new GameScreen(gameState));
-            }   
+            } else if (gameState.players == 2 && gameState.rounds != -1 && gameState.player1 != -1 && gameState.player2 != -1) {
+                Main.switchScreen(new GameScreen(gameState));
+            }
         }
         else if (x >= 720 && x <= 812 && y >= 771 && y <= 839) {
-            if (gameState.players != -1 && gameState.mode != -1 && gameState.rounds != -1 && gameState.player1 != -1) {
+            if (gameState.players == 1 && gameState.rounds != -1 && gameState.player1 != -1) {
+                Main.switchScreen(new GameScreen(gameState));
+            } else if (gameState.players == 2 && gameState.rounds != -1 && gameState.player1 != -1 && gameState.player2 != -1) {
                 Main.switchScreen(new GameScreen(gameState));
             }
         }
