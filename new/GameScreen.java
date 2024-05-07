@@ -44,7 +44,7 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     private ImageIcon playerFemaleWinAgainstRobot;
     private ImageIcon RobotWin;
 
-    private int turnNumber = 1;
+    private int turnNumber = 0;
 
     public GameScreen(GameState state) {
         this.gameState = state;
@@ -276,136 +276,190 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
 
         if (x >= 229 && x <= 362 && y >= 229 && y <= 362) {
             System.out.println("top left square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(0) == "") {
                     grid.set(0, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(0) == "") {
                     grid.set(0, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 384 && x <= 516 && y >= 229 && y <= 362) {
             System.out.println("top middle square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(1) == "") {
                     grid.set(1, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(1) == "") {
                     grid.set(1, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 538 && x <= 671 && y >= 229 && y <= 362) {
             System.out.println("top right square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(2) == "") {
                     grid.set(2, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(2) == "") {
                     grid.set(2, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 229 && x <= 362 && y >= 384 && y <= 516) {
             System.out.println("middle left square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(3) == "") {
                     grid.set(3, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(3) == "") {
                     grid.set(3, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 384 && x <= 516 && y >= 384 && y <= 516) {
             System.out.println("middle middle square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(4) == "") {
                     grid.set(4, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(4) == "") {
                     grid.set(4, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 538 && x <= 671 && y >= 384 && y <= 516) {
             System.out.println("middle right square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(5) == "") {
                     grid.set(5, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(5) == "") {
                     grid.set(5, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 229 && x <= 362 && y >= 538 && y <= 671) {
             System.out.println("bottom left square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(6) == "") {
                     grid.set(6, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(6) == "") {
                     grid.set(6, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 384 && x <= 516 && y >= 538 && y <= 671) {
             System.out.println("bottom middle square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(7) == "") {
                     grid.set(7, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(7) == "") {
                     grid.set(7, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
         
         if (x >= 538 && x <= 671 && y >= 538 && y <= 671) {
             System.out.println("bottom right square clicked");
-            if(player1Turn) {
+            if(!player1Turn) {
                 if(grid.get(8) == "") {
                     grid.set(8, "x");
                     player1Turn = false;
+                    turnNumber += 1;
                 }
-            } else {
+            } else if (gameState.players == 2) {
                 if(grid.get(8) == "") {
                     grid.set(8, "o");
                     player1Turn = true;
+                    turnNumber += 1;
                 }
+            } else if (gameState.players == 1) {
+                grid.set(findBestMove(grid, gameState.difficulty), "o");
+                player1Turn = true;
+                turnNumber += 1;
             }
         }
 
@@ -413,19 +467,34 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
             if(isWinning(grid, "o")) {
                 gameState.scorePlayer2 += 1;
                 gameState.roundNumber += 1;
-                Main.switchScreen(new GameScreen(gameState));
+                delay(1500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Main.switchScreen(new GameScreen(gameState));
+                    }
+                });
             }
         } else {
             if(isWinning(grid, "x")) {
                 gameState.scorePlayer1 += 1;
                 gameState.roundNumber += 1;
-                Main.switchScreen(new GameScreen(gameState));
+                delay(1500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Main.switchScreen(new GameScreen(gameState));
+                    }
+                });
             }
         }
 
+        if (turnNumber == 9) {
+                delay(1500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Main.switchScreen(new GameScreen(gameState));
+                    }
+                });
+        }
         repaint();
     }
-    
+
     public void mousePressed(MouseEvent e){
         
     }
@@ -440,6 +509,12 @@ public class GameScreen extends JPanel implements Screen, MouseListener{
     
     public void mouseExited(MouseEvent e){
         
+    }
+    
+    public static void delay(int milliseconds, ActionListener action) {
+        Timer timer = new Timer(milliseconds, action);
+        timer.setRepeats(false);
+        timer.start();
     }
     
     public int findBestMove(ArrayList<String> grid, int difficulty) {
